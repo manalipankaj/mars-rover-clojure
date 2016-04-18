@@ -19,9 +19,9 @@
     (if (> (count move) 0)
       (cond
        (= \M (first move)) (recur (drop 1 move) (reset! current-pos (move-rover [(first @current-pos) (second @current-pos)] (last @current-pos))))
-       (or (= \R (first move)) (= \L (first move))) (recur (drop 1 move) (reset! current-pos [(first @current-pos) (second @current-pos) (change-rover-direction (last @current-pos) (first move))(change-rover-direction (last @current-pos) (first move))])))
-      accu))
-  (println @current-pos))
+       :else (recur (drop 1 move) (reset! current-pos [(first @current-pos) (second @current-pos) (change-rover-direction (last @current-pos) (first move))(change-rover-direction (last @current-pos) (first move))]))
+       )
+      accu)))
 
 (defn inputs [current moves]
   (def current-pos (atom [(first current) (second current) (last current)]))
